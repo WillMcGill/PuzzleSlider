@@ -27,7 +27,7 @@ function Tile(idx, currPos, x, y, z) {
 // Create Moving Tile Objects
   for (let i = 1; i <= 16; i++){
 
-      console.log(i);
+      //console.log(i);
       let movingTiles =  new MovingTiles(
           i, 
           i,
@@ -54,13 +54,13 @@ function Tile(idx, currPos, x, y, z) {
     
   }
 
-  console.log(tileArr); 
+  //console.log(tileArr); 
 
 MovingTiles.prototype = Object.create(Tile.prototype);
 MovingTiles.prototype.constructor = MovingTiles;
 
 //create board
-function renderBoard(){
+function renderNewBoard(){
 for (let i = 1; i <= 4; i++){
     var newRow = document.createElement("div");
     newRow.className = "row border";
@@ -84,12 +84,12 @@ for (let i = 1; i <= 4; i++){
 function clickHandler(){
     getDiv = this.id;
     console.log({getDiv});
-    blankTest();
+    blankTestSwitch();
 }
 
-renderBoard();
+renderNewBoard();
 
-function blankTest(){
+function blankTestSwitch(){
     let n = 1;
     let tempX = "";
     let tempY = "";
@@ -100,25 +100,28 @@ function blankTest(){
             break;
             };
     }
-                                    //switch coordinates
-    //console.log({tileArr[n].x});
-    console.log("current value of x with 1 " , tileArr[n].x);
-    tempX = tileArr[n].x;
-    console.log('temp set to n ' + tempX);
-    console.log('value of getDiv ' + tileArr[getDiv].x);
+    //switch coordinates
+    
+    tempX = tileArr[n].x   
     tileArr[n].x = tileArr[getDiv].x;
-    console.log('n set to getDiv' + tileArr[n].x);
-    //console.log({tempX});
-    // tileArr[n].x = tileArr[getDiv].x;
-    // tileArr[getDiv].x = tempX;
-    //console.log({tileArr[n].x)};
-    //tempX = tileArr[n].x;
-    //console.log('temp now equals' + tempX);
-    //tileArr[n].x = tileArr[getDiv];
-    //tileArr[getDiv].x = tempX;
-    //console.log(tempX, tileArr[n].x, tileArr[getDiv].x);
-    //console.log({getDiv});
-    // changeLoc();
+    tileArr[getDiv].x = tempX;
+   
+    tempY = tileArr[n].y;    
+    tileArr[n].y = tileArr[getDiv].y;
+    tileArr[getDiv].y = tempY;
+
+    tempPos = tileArr[n].currPos;    
+    tileArr[n].currPos = tileArr[getDiv].currPos;
+    tileArr[getDiv].currPos = tempPos;
+    console.log(tileArr[n].currPos, tileArr[getDiv].currPos, tempPos)
+
+    // console.log({tempY});
+    // console.log("new n" ,tileArr[n].y);
+    //console.log(tileArr[n].x, tileArr[getDiv].x, tempX);
+// console.log(tileArr[n].y, tileArr[getDiv].y, tempY);
+    // console.log("new div", tileArr[getDiv]);
+    // console.log(tileArr[n].y, tileArr[getDiv].y, tempY);
+    //switch Current Position
 }
 
 // function changeLoc(){
