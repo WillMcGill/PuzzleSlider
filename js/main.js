@@ -5,19 +5,16 @@ var count = 0;
 var tileArr =  [];
 let coordX = 0;
 let coordY = 0; 
-
-//create board
-
+var getDiv = 0;
 
 //Define the tile constructor
-
-
-function Tile(idx, currPos, y, x, z) {
+function Tile(idx, currPos, x, y, z) {
+    this.idx = idx;
+    this.currPos = currPos;
     this.x = x;
     this.y = y;
     this.z = z;
-    this.idx = idx;
-    this.currPos = currPos;
+    
     
   }
 // Create Tiles
@@ -43,7 +40,7 @@ function Tile(idx, currPos, y, x, z) {
       if (coordX < 3){
           coordX++;
       }
-      else {coordY++;
+      else  {coordY++;
             coordX = 0};
 
         if (movingTiles.idx == 16){   // blank tile
@@ -52,8 +49,6 @@ function Tile(idx, currPos, y, x, z) {
         }
         console.log(movingTiles.idx);
         
-
-
       tileArr.push(movingTiles);
 
     
@@ -61,10 +56,11 @@ function Tile(idx, currPos, y, x, z) {
 
   console.log(tileArr); 
 
-
 MovingTiles.prototype = Object.create(Tile.prototype);
 MovingTiles.prototype.constructor = MovingTiles;
 
+//create board
+function renderBoard(){
 for (let i = 1; i <= 4; i++){
     var newRow = document.createElement("div");
     newRow.className = "row border";
@@ -72,15 +68,63 @@ for (let i = 1; i <= 4; i++){
 
         for (let j = 1; j <= 4; j++){
             var newCol = document.createElement("div");
-            newCol.className = "col-3 border";
+            newCol.className = "col-3 border mx-auto";
             newCol.id = count + 1;
             //var text = document.createTextNode(count);
             var tile = document.createTextNode(tileArr[count].idx);
+            //tile.className = "mx-auto";
             newCol.style.backgroundColor = tileArr[count].color;
+            newCol.addEventListener("click", clickHandler);
             newRow.appendChild(newCol);
             newCol.appendChild(tile);
             count++;
         }
+}}
 
-        
+function clickHandler(){
+    getDiv = this.id;
+    console.log({getDiv});
+    blankTest();
 }
+
+renderBoard();
+
+function blankTest(){
+    let n = 1;
+    let tempX = "";
+    let tempY = "";
+    let tempPos = "";
+    for (n = 1; n <= 15; n++){
+        console.log({n});
+        if (tileArr[n].z == 1){
+            break;
+            };
+    }
+                                    //switch coordinates
+    //console.log({tileArr[n].x});
+    console.log("current value of x with 1 " , tileArr[n].x);
+    tempX = tileArr[n].x;
+    console.log('temp set to n ' + tempX);
+    console.log('value of getDiv ' + tileArr[getDiv].x);
+    tileArr[n].x = tileArr[getDiv].x;
+    console.log('n set to getDiv' + tileArr[n].x);
+    //console.log({tempX});
+    // tileArr[n].x = tileArr[getDiv].x;
+    // tileArr[getDiv].x = tempX;
+    //console.log({tileArr[n].x)};
+    //tempX = tileArr[n].x;
+    //console.log('temp now equals' + tempX);
+    //tileArr[n].x = tileArr[getDiv];
+    //tileArr[getDiv].x = tempX;
+    //console.log(tempX, tileArr[n].x, tileArr[getDiv].x);
+    //console.log({getDiv});
+    // changeLoc();
+}
+
+// function changeLoc(){
+//     
+
+//     tempX = tileArr[n].x
+//     console.log(tempX);
+    
+// }
