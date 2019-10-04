@@ -47,7 +47,7 @@ function Tile(idx, currPos, x, y, z) {
             movingTiles.z = 1;
             movingTiles.color = "rgb(255,255,255)"
         }
-        console.log(movingTiles.idx);
+        //console.log(movingTiles.idx);
         
       tileArr.push(movingTiles);
 
@@ -69,7 +69,7 @@ for (let i = 1; i <= 4; i++){
         for (let j = 1; j <= 4; j++){
             var newCol = document.createElement("div");
             newCol.className = "col-3 border mx-auto";
-            newCol.id = count + 1;
+            newCol.id = count;
             //var text = document.createTextNode(count);
             var tile = document.createTextNode(tileArr[count].idx);
             //tile.className = "mx-auto";
@@ -83,8 +83,10 @@ for (let i = 1; i <= 4; i++){
 
 function clickHandler(){
     getDiv = this.id;
-    console.log({getDiv});
+    //console.log({getDiv});
     blankTestSwitch();
+    renderBoardOnClick();
+    
 }
 
 renderNewBoard();
@@ -94,9 +96,10 @@ function blankTestSwitch(){
     let tempX = "";
     let tempY = "";
     let tempPos = "";
-    for (n = 1; n <= 15; n++){
+    for (n = 0; n <= 15; n++){
         console.log({n});
         if (tileArr[n].z == 1){
+            console.log(n);
             break;
             };
     }
@@ -113,21 +116,23 @@ function blankTestSwitch(){
     tempPos = tileArr[n].currPos;    
     tileArr[n].currPos = tileArr[getDiv].currPos;
     tileArr[getDiv].currPos = tempPos;
-    console.log(tileArr[n].currPos, tileArr[getDiv].currPos, tempPos)
 
-    // console.log({tempY});
-    // console.log("new n" ,tileArr[n].y);
-    //console.log(tileArr[n].x, tileArr[getDiv].x, tempX);
-// console.log(tileArr[n].y, tileArr[getDiv].y, tempY);
-    // console.log("new div", tileArr[getDiv]);
-    // console.log(tileArr[n].y, tileArr[getDiv].y, tempY);
-    //switch Current Position
+    tileArr[n].z = 0;
+    tileArr[getDiv].z = 1;
+    console.log(tileArr[n].z);
 }
 
-// function changeLoc(){
-//     
-
-//     tempX = tileArr[n].x
-//     console.log(tempX);
+function renderBoardOnClick(){
+    //console.log({tileArr});
+//     //newCount = 1;
     
-// }
+   for(let m = 0; m <= 15; m++){
+//     let newText = tileArr[m].idx;
+//     document.getElementById(newText).innerHTML = tileArr[m + 1].backgroundColor;
+     console.log(tileArr[m].idx, tileArr[m].currPos);
+        //document.getElementById(tileArr[m + 1].currPos).innerHTML = "clicked";    
+    }
+
+//     }
+    
+ }
