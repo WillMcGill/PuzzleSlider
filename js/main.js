@@ -84,6 +84,7 @@ for (let i = 1; i <= 4; i++){
 function clickHandler(){
     getDiv = this.id;
     //console.log({getDiv});
+    console.log(getDiv);
     blankTestSwitch();
     renderBoardOnClick();
     
@@ -92,17 +93,19 @@ function clickHandler(){
 renderNewBoard();
 
 function blankTestSwitch(){
-    let n = 1;
+    //let n = 1;
     let tempX = "";
     let tempY = "";
     let tempPos = "";
-    for (n = 0; n <= 15; n++){
+    for (let n = 0; n <= 15; n++){
         console.log({n});
         if (tileArr[n].z == 1){
             console.log(n);
             break;
             };
     }
+
+    
     //switch coordinates
     
     tempX = tileArr[n].x   
