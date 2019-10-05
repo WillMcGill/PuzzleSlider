@@ -8,18 +8,18 @@ let coordY = 0;
 var getDiv = 0;
 
 //Define the tile constructor
-function Tile(idx, currPos, x, y, z) {
+function Tile(idx, currPos, x, y, tileType) {
     this.idx = idx;
     this.currPos = currPos;
     this.x = x;
     this.y = y;
-    this.z = z;
+    this.tileType = tileType;
     
     
   }
 // Create Tiles
-  function MovingTiles(idx, currPos, x, y, z, color) {
-    Tile.call(this, idx, currPos, x, y, z);
+  function MovingTiles(idx, currPos, x, y, tileType, color) {
+    Tile.call(this, idx, currPos, x, y, tileType);
     this.color = color;
   }
 
@@ -44,7 +44,7 @@ function Tile(idx, currPos, x, y, z) {
             coordX = 0};
 
         if (movingTiles.idx == 16){   // blank tile
-            movingTiles.z = 1;
+            movingTiles.tileType = 1;
             movingTiles.color = "rgb(255,255,255)"
         }
         //console.log(movingTiles.idx);
@@ -84,7 +84,6 @@ for (let i = 1; i <= 4; i++){
 function clickHandler(){
     getDiv = this.id;
     //console.log({getDiv});
-    console.log(getDiv);
     blankTestSwitch();
     renderBoardOnClick();
     
@@ -97,15 +96,13 @@ function blankTestSwitch(){
     let tempX = "";
     let tempY = "";
     let tempPos = "";
-    for (let n = 0; n <= 15; n++){
-       // console.log({n});
-        if (tileArr[n].z == 1){
-            console.log({n});
+    for (n = 0; n <= 15; n++){
+        console.log({n});
+        if (tileArr[n].tileType == 1){
+            console.log(n);
             break;
             };
     }
-
-    
     //switch coordinates
     
     tempX = tileArr[n].x   
@@ -120,9 +117,9 @@ function blankTestSwitch(){
     tileArr[n].currPos = tileArr[getDiv].currPos;
     tileArr[getDiv].currPos = tempPos;
 
-    tileArr[n].z = 0;
-    tileArr[getDiv].z = 1;
-    console.log('z', tileArr[n].z, 'getDiv', tileArr[getDiv].z );
+    tileArr[n].tileType = 0;
+    tileArr[getDiv].tileType = 1;
+    console.log(tileArr[n].tileType);
 }
 
 function renderBoardOnClick(){
