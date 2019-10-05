@@ -93,14 +93,14 @@ function clickHandler(){
 renderNewBoard();
 
 function blankTestSwitch(){
-    //let n = 1;
+    let n = 1;
     let tempX = "";
     let tempY = "";
     let tempPos = "";
     for (let n = 0; n <= 15; n++){
-        console.log({n});
+       // console.log({n});
         if (tileArr[n].z == 1){
-            console.log(n);
+            console.log({n});
             break;
             };
     }
@@ -122,7 +122,7 @@ function blankTestSwitch(){
 
     tileArr[n].z = 0;
     tileArr[getDiv].z = 1;
-    console.log(tileArr[n].z);
+    console.log('z', tileArr[n].z, 'getDiv', tileArr[getDiv].z );
 }
 
 function renderBoardOnClick(){
