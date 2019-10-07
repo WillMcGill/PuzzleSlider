@@ -6,6 +6,7 @@ var tileArr =  [];
 let coordX = 0;
 let coordY = 0; 
 var getDiv = 0;
+//var blankTile = "";
 
 //Define the tile constructor
 function Tile(idx, currPos, x, y, tileType) {
@@ -69,7 +70,7 @@ for (let i = 1; i <= 4; i++){
         for (let j = 1; j <= 4; j++){
             var newCol = document.createElement("div");
             newCol.className = "col-3 border mx-auto";
-            newCol.id = count;
+            newCol.id = Number(count);
             //var text = document.createTextNode(count);
             var tile = document.createTextNode(tileArr[count].idx);
             //tile.className = "mx-auto";
@@ -82,27 +83,34 @@ for (let i = 1; i <= 4; i++){
 }}
 
 function clickHandler(){
-    getDiv = this.id;
-    //console.log({getDiv});
-    blankTestSwitch();
-    renderBoardOnClick();
+    
+
+    getDiv = Number(this.id);
+    var n = 0;
+
+    for (n = 0; n <= 15; n++){
+        //console.log({n});
+        if (tileArr[n].tileType == 1){
+            //var blank = n;
+            console.log("blank tile - ",n);
+            break;
+            };
+    }
+    console.log({getDiv});
+    blankTestSwitch(n);
+    renderBoardOnClick(n);
+    
     
 }
 
 renderNewBoard();
 
-function blankTestSwitch(){
-    let n = 1;
+function blankTestSwitch(n){
+    
     let tempX = "";
     let tempY = "";
     let tempPos = "";
-    for (n = 0; n <= 15; n++){
-        console.log({n});
-        if (tileArr[n].tileType == 1){
-            console.log(n);
-            break;
-            };
-    }
+    
     //switch coordinates
     
     tempX = tileArr[n].x   
@@ -117,22 +125,64 @@ function blankTestSwitch(){
     tileArr[n].currPos = tileArr[getDiv].currPos;
     tileArr[getDiv].currPos = tempPos;
 
+    //switch tile type
+
     tileArr[n].tileType = 0;
     tileArr[getDiv].tileType = 1;
-    console.log(tileArr[n].tileType);
+    
+
 }
 
-function renderBoardOnClick(){
-    //console.log({tileArr});
-//     //newCount = 1;
-    
-   for(let m = 0; m <= 15; m++){
-//     let newText = tileArr[m].idx;
-//     document.getElementById(newText).innerHTML = tileArr[m + 1].backgroundColor;
-     console.log(tileArr[m].idx, tileArr[m].currPos);
-        //document.getElementById(tileArr[m + 1].currPos).innerHTML = "clicked";    
-    }
+function renderBoardOnClick(n){
 
-//     }
     
- }
+    let clickTile = document.getElementById(getDiv).innerHTML;
+    let blankTile = document.getElementById(n).innerHTML;
+
+    console.log({clickTile, blankTile,});
+
+    document.getElementById(getDiv).innerHTML = blankTile;
+    document.getElementById(n).innerHTML = clickTile;
+
+
+    
+}
+    
+    // for (let i = 0; i <= 15; i++){
+        
+    //     console.log('test');
+    //     let a = tileArr[i].currPos;
+    //     let b = tileArr[i].idx;
+    //     console.log('current:', a, 'text:', b);
+    //     document.getElementById(a - 1).innerHTML = b;
+        
+    // }
+    
+    //console.log({tileArr});
+    //console.log("before render - ",n, getDiv);
+    
+    // let clickedTile = document.getElementById(getDiv).innerHTML;
+    // let blankTile = document.getElementById(5).innerHTML;
+    // console.log({n, getDiv});
+    // console.log(document.getElementById(n).innerHTML);
+    // // console.log({clickedTile,blankTile});
+    // // console.log(`elementbyId(${blank} = ${clickedTile}`)
+    // // console.log(`elementbyId(${getDiv} = ${blankTile}`)
+    // // console.log({blank,getDiv});
+    // //console.log(tileArr[getDiv].idx)
+    // // document.getElementById(n) = clickedTile;
+    // // document.getElementById(getDiv) = blankTile;
+    // //getDiv = tileArr[n].currPos;
+    // console.log({clickedTile, blankTile});
+    // document.getElementById(clickedTile - 1).innerHTML = blankTile;
+    // document.getElementById(blankTile - 1).innerHTML = clickedTile;
+    // //console.log({clickedTile, blankTile});
+    
+
+
+
+    
+
+
+    
+ 
