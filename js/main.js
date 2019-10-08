@@ -110,7 +110,7 @@ function clickHandler() {
     console.log({ getDiv });
     blankTestSwitch(n);
     renderBoardOnClick(n);
-
+    winCheck();
 
 }
 
@@ -121,17 +121,11 @@ function blankTestSwitch(n) {
     let blankPosition = tileArr;
     let tempY = "";
     let tempPos = "";
-//if (tileArr[getDiv].currPos + 1 == tileArr[n].currPos && tileArr[getDiv].currPos + 1 !== undefined){
-    //switch coordinates
+    //console.log(Math.abs(getDiv - n));
 
-    // tempX = tileArr[n].x
-    // tileArr[n].x = tileArr[getDiv].x;
-    // tileArr[getDiv].x = tempX;
+if ((Math.abs(getDiv - n) == 1) || Math.abs(getDiv - n) == 4){
 
-    // tempY = tileArr[n].y;
-    // tileArr[n].y = tileArr[getDiv].y;
-    // tileArr[getDiv].y = tempY;
-if (Math.abs(getDiv - n) == 1 || Math.abs(getDiv - n) == 4 && getDiv % 4 !== 0){
+    if (n % 4 !== 0){
     tempPos = tileArr[n].currPos;
     tileArr[n].currPos = tileArr[getDiv].currPos;
     tileArr[getDiv].currPos = tempPos;
@@ -140,7 +134,7 @@ if (Math.abs(getDiv - n) == 1 || Math.abs(getDiv - n) == 4 && getDiv % 4 !== 0){
 
     tileArr[n].tileType = 0;
     tileArr[getDiv].tileType = 1;
-    console.log({getDiv}, {n});
+    //console.log({getDiv}, {n});
 
     let clickTile = document.getElementById(getDiv).innerHTML;
     let blankTile = document.getElementById(n).innerHTML;
@@ -149,6 +143,28 @@ if (Math.abs(getDiv - n) == 1 || Math.abs(getDiv - n) == 4 && getDiv % 4 !== 0){
 
     document.getElementById(getDiv).innerHTML = blankTile;
     document.getElementById(n).innerHTML = clickTile;
+    }
+
+    else if(n % 4 == 0 && (Math.abs(getDiv - n) == 4) || getDiv - n > 0){
+        console.log('move');
+        tempPos = tileArr[n].currPos;
+    tileArr[n].currPos = tileArr[getDiv].currPos;
+    tileArr[getDiv].currPos = tempPos;
+
+    //switch tile type
+
+    tileArr[n].tileType = 0;
+    tileArr[getDiv].tileType = 1;
+    //console.log({getDiv}, {n});
+
+    let clickTile = document.getElementById(getDiv).innerHTML;
+    let blankTile = document.getElementById(n).innerHTML;
+
+    //console.log({ clickTile, blankTile, });
+
+    document.getElementById(getDiv).innerHTML = blankTile;
+    document.getElementById(n).innerHTML = clickTile;
+    }
 }
 
 }
@@ -156,13 +172,7 @@ if (Math.abs(getDiv - n) == 1 || Math.abs(getDiv - n) == 4 && getDiv % 4 !== 0){
 function renderBoardOnClick(n) {
 
 
-    // let clickTile = document.getElementById(getDiv).innerHTML;
-    // let blankTile = document.getElementById(n).innerHTML;
 
-    // //console.log({ clickTile, blankTile, });
-
-    // document.getElementById(getDiv).innerHTML = blankTile;
-    // document.getElementById(n).innerHTML = clickTile;
 
 }
 
@@ -187,4 +197,19 @@ function randomizeBoard(){
     blankTestSwitch(n);
     renderBoardOnClick(n);}
 
+}
+
+function winCheck(){
+    for (let i = 0; i < 16; i++){
+        if (tileArr[i].idx !== tileArr[i].currPos){
+            console.log("no win")
+            break;
+        
+        }
+        else{
+            console.log('win');
+        }
+        console.log(tileArr[i].idx);
+        console.log(tileArr[i].currPos);
+    }
 }
