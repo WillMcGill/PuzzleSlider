@@ -19,9 +19,9 @@ function Tile(idx, currPos, x, y, tileType) {
 
 }
 // Create Tiles
-function MovingTiles(idx, currPos, x, y, tileType, color) {
+function MovingTiles(idx, currPos, x, y, tileType, background) {
     Tile.call(this, idx, currPos, x, y, tileType);
-    this.color = color;
+    this.background = background;
 }
 
 
@@ -48,7 +48,7 @@ for (let i = 1; i <= 16; i++) {
 
     if (movingTiles.idx == 16) {   // blank tile
         movingTiles.tileType = 1;
-        movingTiles.color = "rgb(255,255,255)"
+        movingTiles.background = "rgb(255,255,255)"
     }
     //console.log(movingTiles.idx);
 
@@ -66,7 +66,7 @@ MovingTiles.prototype.constructor = MovingTiles;
 function renderNewBoard() {
     for (let i = 1; i <= 4; i++) {
         var newRow = document.createElement("div");
-        newRow.className = "row border";
+        newRow.className = "row border h-100";
         app.appendChild(newRow);
 
         for (let j = 1; j <= 4; j++) {
@@ -75,9 +75,10 @@ function renderNewBoard() {
             newCol.id = Number(count);
             //var text = document.createTextNode(count);
             var tile = document.createTextNode(tileArr[count].idx);
-            //tile.className = "mx-auto";
-            newCol.style.backgroundColor = tileArr[count].color;
+            newCol.style.backgroundImage = "url('/imgs/warlock.jpg')";
             newCol.addEventListener("click", clickHandler);
+            newCol.setAttribute("style", "height:200px; width:200px; background-image:url('/imgs/warlock.jpg')");
+            //newCol.setAttribute("style", "width: 200px");
             newRow.appendChild(newCol);
             newCol.appendChild(tile);
             count++;
