@@ -118,20 +118,20 @@ renderNewBoard();
 
 function blankTestSwitch(n) {
 
-    let tempX = "";
+    let blankPosition = tileArr;
     let tempY = "";
     let tempPos = "";
-
+//if (tileArr[getDiv].currPos + 1 == tileArr[n].currPos && tileArr[getDiv].currPos + 1 !== undefined){
     //switch coordinates
 
-    tempX = tileArr[n].x
-    tileArr[n].x = tileArr[getDiv].x;
-    tileArr[getDiv].x = tempX;
+    // tempX = tileArr[n].x
+    // tileArr[n].x = tileArr[getDiv].x;
+    // tileArr[getDiv].x = tempX;
 
-    tempY = tileArr[n].y;
-    tileArr[n].y = tileArr[getDiv].y;
-    tileArr[getDiv].y = tempY;
-
+    // tempY = tileArr[n].y;
+    // tileArr[n].y = tileArr[getDiv].y;
+    // tileArr[getDiv].y = tempY;
+if (Math.abs(getDiv - n) == 1 || Math.abs(getDiv - n) == 4 && getDiv % 4 !== 0){
     tempPos = tileArr[n].currPos;
     tileArr[n].currPos = tileArr[getDiv].currPos;
     tileArr[getDiv].currPos = tempPos;
@@ -140,20 +140,29 @@ function blankTestSwitch(n) {
 
     tileArr[n].tileType = 0;
     tileArr[getDiv].tileType = 1;
+    console.log({getDiv}, {n});
 
+    let clickTile = document.getElementById(getDiv).innerHTML;
+    let blankTile = document.getElementById(n).innerHTML;
+
+    //console.log({ clickTile, blankTile, });
+
+    document.getElementById(getDiv).innerHTML = blankTile;
+    document.getElementById(n).innerHTML = clickTile;
+}
 
 }
 
 function renderBoardOnClick(n) {
 
 
-    let clickTile = document.getElementById(getDiv).innerHTML;
-    let blankTile = document.getElementById(n).innerHTML;
+    // let clickTile = document.getElementById(getDiv).innerHTML;
+    // let blankTile = document.getElementById(n).innerHTML;
 
-    console.log({ clickTile, blankTile, });
+    // //console.log({ clickTile, blankTile, });
 
-    document.getElementById(getDiv).innerHTML = blankTile;
-    document.getElementById(n).innerHTML = clickTile;
+    // document.getElementById(getDiv).innerHTML = blankTile;
+    // document.getElementById(n).innerHTML = clickTile;
 
 }
 
@@ -170,7 +179,7 @@ function randomizeBoard(){
         //console.log({n});
         if (tileArr[n].tileType == 1) {
             //var blank = n;
-            console.log("blank tile - ", n);
+            //console.log("blank tile - ", n);
             break;
         };
     }
@@ -179,10 +188,3 @@ function randomizeBoard(){
     renderBoardOnClick(n);}
 
 }
-
-
-
-
-
-
-
