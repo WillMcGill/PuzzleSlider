@@ -1,5 +1,6 @@
 var app = document.getElementById("app");
-app.className = "container-fluid border";
+app.className = "container-flex d-inline-block";
+app.setAttribute('width', '800px');
 
 var count = 0;
 var tileArr = [];
@@ -91,7 +92,7 @@ function renderNewBoard() {
     randomButt.innerHTML = "Randomize";
 
     var newRow = document.createElement("div");
-    newRow.className = "row";
+    newRow.className = "row mx-auto";
     var uploadButt = document.createElement("INPUT");
     uploadButt.className = "form-group form-control-file mx-auto";
     uploadButt.setAttribute('type', 'file');
@@ -111,7 +112,7 @@ function renderTiles() {
 
         for (let j = 0; j <= 3; j++) {
             var newCol = document.createElement("div");
-            newCol.className = "col-3 border mx-auto p-0";
+            newCol.className = "col-3 mx-auto p-0 border";
             newCol.setAttribute('width', '200px');
             newCol.id = Number(count);
             var tile = document.createTextNode(tileArr[count].idx);
