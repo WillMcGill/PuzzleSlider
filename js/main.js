@@ -151,7 +151,7 @@ function clickHandler() {
     console.log({ getDiv });
     blankTestSwitch(n);
     //renderBoardOnClick(n);
-    winCheck();
+    setTimeout(winCheck, 100);  //winCheck();
 
 }
 
