@@ -66,12 +66,12 @@ MovingTiles.prototype.constructor = MovingTiles;
 function renderNewBoard() {
 
     var imageLoc = "/imgs/warlock.jpg";
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 0; i <= 3; i++) {
         var newRow = document.createElement("div");
         newRow.className = "row border";
         app.appendChild(newRow);
 
-        for (let j = 1; j <= 4; j++) {
+        for (let j = 0; j <= 3; j++) {
             var newCol = document.createElement("div");
             newCol.className = "col-3 border mx-auto p-0";
             newCol.id = Number(count);
@@ -79,8 +79,11 @@ function renderNewBoard() {
             var tile = document.createTextNode(tileArr[count].idx);
             var image = document.createElement('img');
             image.src = imageLoc;
-            image.setAttribute("style", "margin-left: -400px; margin-right: -400px; overflow: hidden;")
-            //var marginSet = i * 200 + 'px';
+            var marginLeft = j * -200 + 'px';
+            var marginTop = i * -200 + 'px';
+            image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden;")
+            console.log(marginLeft);
+
             //console.log(marginSet);
             newCol.addEventListener("click", clickHandler);
             newCol.setAttribute("style", "height:200px; width:200px; overflow: hidden;");
