@@ -6,6 +6,7 @@ var tileArr = [];
 let coordX = 0;
 let coordY = 0;
 var getDiv = 0;
+var imageLoc = "/imgs/warlock.jpg";
 //var blankTile = "";
 
 //Define the tile constructor
@@ -64,17 +65,43 @@ MovingTiles.prototype.constructor = MovingTiles;
 
 //create board
 function renderNewBoard() {
-
-    // Create Title
+    count = 0;
+    document.getElementById("app").innerHTML = "";
+    //Create Title
     var newRow = document.createElement("div");
     newRow.className = "row";
     var newDiv = document.createElement("div");
-    newDiv.className = "h1 mx-auto";
+    newDiv.className = "h1 mx-auto text-center";
     var title = document.createTextNode("Puzzle Slider")
     newDiv.appendChild(title);
     app.appendChild(newDiv);
 
-    var imageLoc = "/imgs/warlock.jpg";
+    
+
+    renderTiles();
+
+    var newRow = document.createElement("div");
+    newRow.className = "row";
+    var randomButt = document.createElement("button");
+    randomButt.className = "btn btn-info mx-auto";
+    randomButt.addEventListener("click", randomizeBoard);
+    app.appendChild(newRow);
+    newRow.appendChild(randomButt);
+    randomButt.innerHTML = "Randomize";
+
+    var newRow = document.createElement("div");
+    newRow.className = "row";
+    var uploadButt = document.createElement("INPUT");
+    uploadButt.className = "form-group form-control-file text-center";
+    uploadButt.setAttribute('type', 'file');
+    uploadButt.addEventListener("change", uploadImage);
+    app.appendChild(newRow);
+    newRow.appendChild(uploadButt);
+    //uploadButt.innerHTML = "Upload Image";
+}
+
+function renderTiles() {
+    count = 0;
     for (let i = 0; i <= 3; i++) {
         var newRow = document.createElement("div");
         //newRow.setAttribute('width', '800px');
@@ -93,10 +120,9 @@ function renderNewBoard() {
             image.setAttribute('height', '850px');
             var marginLeft = j * -200 + 'px';
             var marginTop = i * -200 + 'px';
-            if (count < 15)
-            {image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden;")}
-            else {image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden; opacity: 0;")}
-            // console.log(marginLeft);
+            if (count < 15) { image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden;") }
+            else { image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden; opacity: 0;") }
+            console.log(marginLeft);
 
             newCol.addEventListener("click", clickHandler);
             newCol.setAttribute("style", "height:200px; width:200px; overflow: hidden;");
@@ -105,15 +131,8 @@ function renderNewBoard() {
             count++;
         }
     }
-    var newRow = document.createElement("div");
-    newRow.className = "row";
-    var randomButt = document.createElement("button");
-    randomButt.className = "btn btn-info mx-auto";
-    randomButt.addEventListener("click", randomizeBoard);
-    app.appendChild(newRow);
-    newRow.appendChild(randomButt);
-    randomButt.innerHTML = "Randomize";
 }
+
 
 function clickHandler() {
 
@@ -131,7 +150,7 @@ function clickHandler() {
     }
     console.log({ getDiv });
     blankTestSwitch(n);
-    renderBoardOnClick(n);
+    //renderBoardOnClick(n);
     winCheck();
 
 }
@@ -145,93 +164,106 @@ function blankTestSwitch(n) {
     let tempPos = "";
     //console.log(Math.abs(getDiv - n));
 
-if ((Math.abs(getDiv - n) == 1) || Math.abs(getDiv - n) == 4){
+    if ((Math.abs(getDiv - n) == 1) || Math.abs(getDiv - n) == 4) {
 
-    if (n % 4 !== 0){
-    tempPos = tileArr[n].currPos;
-    tileArr[n].currPos = tileArr[getDiv].currPos;
-    tileArr[getDiv].currPos = tempPos;
+        if (n % 4 !== 0) {
+            tempPos = tileArr[n].currPos;
+            tileArr[n].currPos = tileArr[getDiv].currPos;
+            tileArr[getDiv].currPos = tempPos;
 
-    //switch tile type
+            //switch tile type
 
-    tileArr[n].tileType = 0;
-    tileArr[getDiv].tileType = 1;
-    //console.log({getDiv}, {n});
+            tileArr[n].tileType = 0;
+            tileArr[getDiv].tileType = 1;
+            //console.log({getDiv}, {n});
 
-    let clickTile = document.getElementById(getDiv).innerHTML;
-    let blankTile = document.getElementById(n).innerHTML;
+            let clickTile = document.getElementById(getDiv).innerHTML;
+            let blankTile = document.getElementById(n).innerHTML;
 
-    //console.log({ clickTile, blankTile, });
+            //console.log({ clickTile, blankTile, });
 
-    document.getElementById(getDiv).innerHTML = blankTile;
-    document.getElementById(n).innerHTML = clickTile;
-    }
-
-    else if(n % 4 == 0 && (Math.abs(getDiv - n) == 4) || getDiv - n > 0){
-        console.log('move');
-        tempPos = tileArr[n].currPos;
-    tileArr[n].currPos = tileArr[getDiv].currPos;
-    tileArr[getDiv].currPos = tempPos;
-
-    //switch tile type
-
-    tileArr[n].tileType = 0;
-    tileArr[getDiv].tileType = 1;
-    //console.log({getDiv}, {n});
-
-    let clickTile = document.getElementById(getDiv).innerHTML;
-    let blankTile = document.getElementById(n).innerHTML;
-
-    //console.log({ clickTile, blankTile, });
-
-    document.getElementById(getDiv).innerHTML = blankTile;
-    document.getElementById(n).innerHTML = clickTile;
-    }
-}
-
-}
-
-function renderBoardOnClick(n) {
-
-
-
-
-}
-
-function randomizeBoard(){
-
-    for (let i = 1; i <= 500; i++){
-    
-        
-    
-    getDiv = Math.floor(Math.random() * 16);
-    var n = 0;
-
-    for (n = 0; n <= 15; n++) {
-        //console.log({n});
-        if (tileArr[n].tileType == 1) {
-            //var blank = n;
-            //console.log("blank tile - ", n);
-            break;
-        };
-    }
-    console.log({ getDiv });
-    blankTestSwitch(n);
-    renderBoardOnClick(n);}
-
-}
-
-function winCheck(){
-    for (let i = 0; i < 16; i++){
-        if (tileArr[i].idx !== tileArr[i].currPos){
-            console.log("no win")
-            break;
-        
+            document.getElementById(getDiv).innerHTML = blankTile;
+            document.getElementById(n).innerHTML = clickTile;
         }
-        else{
-            console.log('win');
+
+        else if (n % 4 == 0 && (Math.abs(getDiv - n) == 4) || getDiv - n > 0) {
+            console.log('move');
+            tempPos = tileArr[n].currPos;
+            tileArr[n].currPos = tileArr[getDiv].currPos;
+            tileArr[getDiv].currPos = tempPos;
+
+            //switch tile type
+
+            tileArr[n].tileType = 0;
+            tileArr[getDiv].tileType = 1;
+            //console.log({getDiv}, {n});
+
+            let clickTile = document.getElementById(getDiv).innerHTML;
+            let blankTile = document.getElementById(n).innerHTML;
+
+            //console.log({ clickTile, blankTile, });
+
+            document.getElementById(getDiv).innerHTML = blankTile;
+            document.getElementById(n).innerHTML = clickTile;
+        }
+    }
+
+}
+
+// function renderBoardOnClick(n) {
+
+
+
+
+// }
+
+function randomizeBoard() {
+
+    for (let i = 1; i <= 500; i++) {
+
+
+
+        getDiv = Math.floor(Math.random() * 16);
+        var n = 0;
+
+        for (n = 0; n <= 15; n++) {
+            //console.log({n});
+            if (tileArr[n].tileType == 1) {
+                //var blank = n;
+                //console.log("blank tile - ", n);
+                break;
+            };
+        }
+        console.log({ getDiv });
+        blankTestSwitch(n);
+        //renderBoardOnClick(n);}
+
+    }
+
+
+}
+function winCheck() {
+    for (let i = 0; i < 16; i++) {
+        if (tileArr[i].idx !== tileArr[i].currPos) {
+            //console.log("no win")
+            break;
+
+        }
+        else {
+            //console.log('win');
         }
         console.log(tileArr[i].idx);
         console.log(tileArr[i].currPos);
     }
+}
+
+function uploadImage(e) {
+
+    let newImage = URL.createObjectURL(e.target.files[0]);
+
+    imageLoc = newImage;
+    console.log(newImage);
+    console.log(e);
+    renderNewBoard();
+
 }
