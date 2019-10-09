@@ -64,23 +64,31 @@ MovingTiles.prototype.constructor = MovingTiles;
 
 //create board
 function renderNewBoard() {
+
+    var imageLoc = "/imgs/warlock.jpg";
     for (let i = 1; i <= 4; i++) {
         var newRow = document.createElement("div");
-        newRow.className = "row border h-100";
+        newRow.className = "row border";
         app.appendChild(newRow);
 
         for (let j = 1; j <= 4; j++) {
             var newCol = document.createElement("div");
-            newCol.className = "col-3 border mx-auto";
+            newCol.className = "col-3 border mx-auto p-0";
             newCol.id = Number(count);
             //var text = document.createTextNode(count);
             var tile = document.createTextNode(tileArr[count].idx);
-            newCol.style.backgroundImage = "url('/imgs/warlock.jpg')";
+            var image = document.createElement('img');
+            image.src = imageLoc;
+            image.setAttribute("style", "margin-left: -400px; margin-right: -400px; overflow: hidden;")
+            //var marginSet = i * 200 + 'px';
+            //console.log(marginSet);
             newCol.addEventListener("click", clickHandler);
-            newCol.setAttribute("style", "height:200px; width:200px; background-image:url('/imgs/warlock.jpg')");
-            //newCol.setAttribute("style", "width: 200px");
+            newCol.setAttribute("style", "height:200px; width:200px; overflow: hidden;");
+            //newCol.style.marginRight = "500px";
+            //console.log(j*100);
             newRow.appendChild(newCol);
             newCol.appendChild(tile);
+            newCol.appendChild(image);
             count++;
         }
     }
@@ -179,7 +187,7 @@ function renderBoardOnClick(n) {
 
 function randomizeBoard(){
 
-    for (let i = 1; i <= 100; i++){
+    for (let i = 1; i <= 500; i++){
     
         
     
