@@ -68,7 +68,7 @@ function renderNewBoard() {
     var imageLoc = "/imgs/warlock.jpg";
     for (let i = 0; i <= 3; i++) {
         var newRow = document.createElement("div");
-        newRow.className = "row border";
+        newRow.className = "row";
         app.appendChild(newRow);
 
         for (let j = 0; j <= 3; j++) {
@@ -81,7 +81,9 @@ function renderNewBoard() {
             image.src = imageLoc;
             var marginLeft = j * -200 + 'px';
             var marginTop = i * -200 + 'px';
-            image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden;")
+            if (count < 15)
+            {image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden;")}
+            else {image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden; opacity: 0;")}
             console.log(marginLeft);
 
             //console.log(marginSet);
@@ -90,7 +92,7 @@ function renderNewBoard() {
             //newCol.style.marginRight = "500px";
             //console.log(j*100);
             newRow.appendChild(newCol);
-            newCol.appendChild(tile);
+            //newCol.appendChild(tile);
             newCol.appendChild(image);
             count++;
         }
