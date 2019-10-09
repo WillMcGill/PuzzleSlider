@@ -92,7 +92,7 @@ function renderNewBoard() {
     var newRow = document.createElement("div");
     newRow.className = "row";
     var uploadButt = document.createElement("INPUT");
-    uploadButt.className = "form-group form-control-file text-center";
+    uploadButt.className = "form-group form-control-file mx-auto";
     uploadButt.setAttribute('type', 'file');
     uploadButt.addEventListener("change", uploadImage);
     app.appendChild(newRow);
@@ -243,6 +243,7 @@ function randomizeBoard() {
 
 }
 function winCheck() {
+    let winCount = 0;
     for (let i = 0; i < 16; i++) {
         if (tileArr[i].idx !== tileArr[i].currPos) {
             //console.log("no win")
@@ -250,7 +251,11 @@ function winCheck() {
 
         }
         else {
-            //console.log('win');
+            winCount++;
+            if (winCount == 16){
+                alert("Winner!");
+            }
+
         }
         console.log(tileArr[i].idx);
         console.log(tileArr[i].currPos);
