@@ -257,10 +257,8 @@ function winCheck() {
             if (winCount == 16){
                 alert("Winner!");
             }
-
         }
-        console.log(tileArr[i].idx);
-        console.log(tileArr[i].currPos);
+        
     }
 }
 
