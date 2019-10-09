@@ -7,7 +7,7 @@ var tileArr = [];
 let coordX = 0;
 let coordY = 0;
 var getDiv = 0;
-var imageLoc = "/imgs/warlock.jpg";
+var imageLoc = "imgs/warlock.jpg";
 //var blankTile = "";
 
 //Define the tile constructor
