@@ -65,34 +65,42 @@ MovingTiles.prototype.constructor = MovingTiles;
 //create board
 function renderNewBoard() {
 
+    // Create Title
+    var newRow = document.createElement("div");
+    newRow.className = "row";
+    var newDiv = document.createElement("div");
+    newDiv.className = "h1 mx-auto";
+    var title = document.createTextNode("Puzzle Slider")
+    newDiv.appendChild(title);
+    app.appendChild(newDiv);
+
     var imageLoc = "/imgs/warlock.jpg";
     for (let i = 0; i <= 3; i++) {
         var newRow = document.createElement("div");
+        //newRow.setAttribute('width', '800px');
         newRow.className = "row";
         app.appendChild(newRow);
 
         for (let j = 0; j <= 3; j++) {
             var newCol = document.createElement("div");
             newCol.className = "col-3 border mx-auto p-0";
+            newCol.setAttribute('width', '200px');
             newCol.id = Number(count);
-            //var text = document.createTextNode(count);
             var tile = document.createTextNode(tileArr[count].idx);
             var image = document.createElement('img');
             image.src = imageLoc;
+            image.setAttribute('width', '850px');
+            image.setAttribute('height', '850px');
             var marginLeft = j * -200 + 'px';
             var marginTop = i * -200 + 'px';
             if (count < 15)
             {image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden;")}
             else {image.setAttribute("style", "margin-top:" + marginTop + "; margin-left:" + marginLeft + "; overflow: hidden; opacity: 0;")}
-            console.log(marginLeft);
+            // console.log(marginLeft);
 
-            //console.log(marginSet);
             newCol.addEventListener("click", clickHandler);
             newCol.setAttribute("style", "height:200px; width:200px; overflow: hidden;");
-            //newCol.style.marginRight = "500px";
-            //console.log(j*100);
             newRow.appendChild(newCol);
-            //newCol.appendChild(tile);
             newCol.appendChild(image);
             count++;
         }
