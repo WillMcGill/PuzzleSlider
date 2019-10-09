@@ -1,5 +1,5 @@
 var app = document.getElementById("app");
-app.className = "container-fluid p-5 border";
+app.className = "container-fluid border";
 
 var count = 0;
 var tileArr = [];
@@ -68,6 +68,7 @@ function renderNewBoard() {
     count = 0;
     document.getElementById("app").innerHTML = "";
     //Create Title
+    //app.setAttribute('width', '800px');
     var newRow = document.createElement("div");
     newRow.className = "row";
     var newDiv = document.createElement("div");
