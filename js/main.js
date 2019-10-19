@@ -153,7 +153,7 @@ function clickHandler() {
     console.log({ getDiv });
     blankTestSwitch(n);
     //renderBoardOnClick(n);
-    setTimeout(winCheck, 100);  //winCheck();
+    //setTimeout(winCheck, 100);  //winCheck();
 
 }
 
@@ -186,9 +186,10 @@ function blankTestSwitch(n) {
 
             document.getElementById(getDiv).innerHTML = blankTile;
             document.getElementById(n).innerHTML = clickTile;
+            setTimeout(winCheck, 100);
         }
 
-        else if (n % 4 == 0 && (Math.abs(getDiv - n) == 4) || getDiv - n > 0) {
+        else if ((getDiv % 4 == 0 && (n + 1) % 4 !== 0) || ((n % 4 == 0 && n - getDiv !== 1))) {
             console.log('move');
             tempPos = tileArr[n].currPos;
             tileArr[n].currPos = tileArr[getDiv].currPos;
@@ -207,6 +208,7 @@ function blankTestSwitch(n) {
 
             document.getElementById(getDiv).innerHTML = blankTile;
             document.getElementById(n).innerHTML = clickTile;
+            setTimeout(winCheck, 100);
         }
     }
 
@@ -267,8 +269,8 @@ function uploadImage(e) {
     let newImage = URL.createObjectURL(e.target.files[0]);
 
     imageLoc = newImage;
-    console.log(newImage);
-    console.log(e);
+    // console.log(newImage);
+    // console.log(e);
     renderNewBoard();
 
 }
