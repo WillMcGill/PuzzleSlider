@@ -8,7 +8,6 @@ let coordX = 0;
 let coordY = 0;
 var getDiv = 0;
 var imageLoc = "imgs/warlock.jpg";
-//var blankTile = "";
 
 //Define the tile constructor
 function Tile(idx, currPos, x, y, tileType) {
@@ -30,7 +29,6 @@ function MovingTiles(idx, currPos, x, y, tileType, background) {
 // Create Moving Tile Objects
 for (let i = 1; i <= 16; i++) {
 
-    //console.log(i);
     let movingTiles = new MovingTiles(
         i,
         i,
@@ -52,14 +50,12 @@ for (let i = 1; i <= 16; i++) {
         movingTiles.tileType = 1;
         movingTiles.background = "rgb(255,255,255)"
     }
-    //console.log(movingTiles.idx);
 
     tileArr.push(movingTiles);
 
 
 }
 
-//console.log(tileArr); 
 
 MovingTiles.prototype = Object.create(Tile.prototype);
 MovingTiles.prototype.constructor = MovingTiles;
@@ -69,7 +65,6 @@ function renderNewBoard() {
     count = 0;
     document.getElementById("app").innerHTML = "";
     //Create Title
-    //app.setAttribute('width', '800px');
     var newRow = document.createElement("div");
     newRow.className = "row";
     var newDiv = document.createElement("div");
@@ -106,7 +101,6 @@ function renderTiles() {
     count = 0;
     for (let i = 0; i <= 3; i++) {
         var newRow = document.createElement("div");
-        //newRow.setAttribute('width', '800px');
         newRow.className = "row";
         app.appendChild(newRow);
 
@@ -143,17 +137,13 @@ function clickHandler() {
     var n = 0;
 
     for (n = 0; n <= 15; n++) {
-        //console.log({n});
         if (tileArr[n].tileType == 1) {
-            //var blank = n;
             console.log("blank tile - ", n);
             break;
         };
     }
     console.log({ getDiv });
     blankTestSwitch(n);
-    //renderBoardOnClick(n);
-    //setTimeout(winCheck, 100);  //winCheck();
 
 }
 
@@ -164,7 +154,6 @@ function blankTestSwitch(n) {
     let blankPosition = tileArr;
     let tempY = "";
     let tempPos = "";
-    //console.log(Math.abs(getDiv - n));
 
     if ((Math.abs(getDiv - n) == 1) || Math.abs(getDiv - n) == 4) {
 
@@ -177,12 +166,10 @@ function blankTestSwitch(n) {
 
             tileArr[n].tileType = 0;
             tileArr[getDiv].tileType = 1;
-            //console.log({getDiv}, {n});
 
             let clickTile = document.getElementById(getDiv).innerHTML;
             let blankTile = document.getElementById(n).innerHTML;
 
-            //console.log({ clickTile, blankTile, });
 
             document.getElementById(getDiv).innerHTML = blankTile;
             document.getElementById(n).innerHTML = clickTile;
@@ -199,7 +186,6 @@ function blankTestSwitch(n) {
 
             tileArr[n].tileType = 0;
             tileArr[getDiv].tileType = 1;
-            //console.log({getDiv}, {n});
 
             let clickTile = document.getElementById(getDiv).innerHTML;
             let blankTile = document.getElementById(n).innerHTML;
@@ -213,28 +199,15 @@ function blankTestSwitch(n) {
     }
 
 }
-
-// function renderBoardOnClick(n) {
-
-
-
-
-// }
-
 function randomizeBoard() {
 
     for (let i = 1; i <= 500; i++) {
-
-
-
         getDiv = Math.floor(Math.random() * 16);
         var n = 0;
 
         for (n = 0; n <= 15; n++) {
             //console.log({n});
             if (tileArr[n].tileType == 1) {
-                //var blank = n;
-                //console.log("blank tile - ", n);
                 break;
             };
         }
@@ -243,14 +216,11 @@ function randomizeBoard() {
         //renderBoardOnClick(n);}
 
     }
-
-
 }
 function winCheck() {
     let winCount = 0;
     for (let i = 0; i < 16; i++) {
         if (tileArr[i].idx !== tileArr[i].currPos) {
-            //console.log("no win")
             break;
 
         }
@@ -269,8 +239,6 @@ function uploadImage(e) {
     let newImage = URL.createObjectURL(e.target.files[0]);
 
     imageLoc = newImage;
-    // console.log(newImage);
-    // console.log(e);
     renderNewBoard();
 
 }
